@@ -1,8 +1,10 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Header from './components/Header.js'
+import NewTodoForm from './components/NewTodoForm.js'
 import ToDoList from './components/ToDoList.js'
 
-export default function () {
+
+export default function App() {
 
     const todos=[{
       "id": 1,
@@ -180,12 +182,15 @@ export default function () {
       "category": "Extended",
       "date": "02/20/2022"
     }]
+
+    let [isOpen, setIsOpen] = useState(false);
     
 
   return (
     <div>
-   <Header/>
-   <ToDoList todos={todos}/>
+   <Header isOpen={isOpen} setIsOpen={setIsOpen}/>
+   <ToDoList todos={todos} />
+   <NewTodoForm isOpen={isOpen} setIsOpen={setIsOpen}/>
 
    </div>
   )

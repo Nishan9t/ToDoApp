@@ -1,6 +1,9 @@
-export default function Header() {
+
+
+
+export default function Header({isOpen,setIsOpen}) {
   return (
-    <header className="bg-indigo-900 h-14 sticky top-0 ">
+    <header className="bg-indigo-900 sticky top-0 ">
       <div className="flex justify-between max-w-7xl items-center mx-auto h-14 px-4">
         <div className="flex items-center text-green-400 ">
           <svg
@@ -21,7 +24,9 @@ export default function Header() {
           </h3>
         </div>
 
-        <button className="bg-white px-4 py-3 rounded-lg shadow-md hover:bg-yellow-400">
+        <button className="bg-white px-4 py-3 rounded-lg shadow-md hover:bg-green-400" onClick={()=>{
+          setIsOpen(true)
+        }}>
           <div className="flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"

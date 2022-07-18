@@ -1,17 +1,34 @@
 import React from 'react'
+import {useState} from 'react';
 
 export default function Todo({todo}) {
+
+  const [color,setColor]=useState('none')
+
+function clicked()
+{
+  if(color==='none')
+  {
+  setColor("green")
+  }
+  else{
+    setColor('none')
+  }
+}
+
   return (
     <div className="max-w-6xl mx-auto flex justify-between px-8 py-4 bg-yellow-300 shadow-xl mt-6 rounded-lg border-2 border-yellow-400">
     <div>
       <h2 className="text-2xl font-bold">Title:  {todo.title}</h2>
       <p><b>Description:</b> {todo.description}</p>
       <div className="flex space-x-6 mt-3">
-        <button>
+        <button  onClick={()=>clicked()
+        }>
           <svg
+          
             xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6"
-            fill="none"
+            fill={color}
             viewBox="0 0 24 24"
             stroke="currentColor"
             stroke-width="2"
@@ -42,10 +59,10 @@ export default function Todo({todo}) {
       </div>
     </div>
 
-    <div className='items-right'>
-      <h3>Category: {todo.category}</h3>
+    <div className='bg-red-200 px-4 py-2 mr-8 w-64'>
+      <h3><b>Category:</b> {todo.category}</h3>
       <h4 className="flex">
-          Done:
+          <b>Done:</b>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-6 w-6"
@@ -62,7 +79,7 @@ export default function Todo({todo}) {
           />
         </svg>
       </h4>
-      <h4>DateTime: {todo.date}</h4>
+      <h4><b>DateTime: </b>{todo.date}</h4>
     </div>
   </div>
   )
