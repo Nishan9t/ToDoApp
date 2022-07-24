@@ -1,12 +1,16 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import Header from './components/Header.js'
 import NewTodoForm from './components/NewTodoForm.js'
 import ToDoList from './components/ToDoList.js'
+import { Toaster } from 'react-hot-toast';
+
 
 
 export default function App() {
 
-    const todos=[{
+ 
+
+    /*const todos=[{
       "id": 1,
       "title": "Universal zero defect open architecture",
       "description": "Object-based bandwidth-monitored architecture",
@@ -182,16 +186,72 @@ export default function App() {
       "category": "Extended",
       "date": "02/20/2022"
     }]
-
+    */
     let [isOpen, setIsOpen] = useState(false);
+
+    let [todos,setTodos]=useState([])
+
+   
+
+    useEffect(()=>{
+      //localStorage.setItem('todos',JSON.stringify(todos))
+
+      let tempArray=JSON.parse(localStorage.getItem('todos'));
+     console.log(tempArray)
+
+      setTodos(JSON.parse(localStorage.getItem('todos')));
+    
+
+    },[])
+
+
+
+    function deleteTodo(todoToDelete)
+    {
+      
+      if(window.confirm("Are you sure"))
+      {
+      console.log("Delete Button Clicked")
+      console.log("Delete object",todoToDelete)
+
+        let newTodos=todos.filter((todosObj)=>{
+          return todosObj.id!==todoToDelete.id
+          });
+
+          console.log(newTodos)
+
+          setTodos(newTodos);
+          localStorage.setItem('todos',JSON.stringify(newTodos));
+      }
+      else{
+        console.log("delete cancelled");
+      }
+
+     
+     
+    }
+
+    function addTodo(newTodo)
+    {
+      console.log("Addd todo button clicked");
+      console.log("new todo is:",newTodo);
+
+
+
+      setTodos([...todos,newTodo]);
+      localStorage.setItem("todos",JSON.stringify([...todos,newTodo]))
+    }
+
+   
     
 
   return (
     <div>
+      <Toaster />
    <Header isOpen={isOpen} setIsOpen={setIsOpen}/>
-   <ToDoList todos={todos} />
-   <NewTodoForm isOpen={isOpen} setIsOpen={setIsOpen}/>
-
+   <ToDoList todos={todos} deleteTodo={deleteTodo} />
+   <NewTodoForm isOpen={isOpen} setIsOpen={setIsOpen} addTodo={addTodo} todos={todos}/>
+    
    </div>
   )
 }

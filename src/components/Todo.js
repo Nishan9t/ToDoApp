@@ -1,7 +1,7 @@
 import React from 'react'
 import {useState} from 'react';
 
-export default function Todo({todo}) {
+export default function Todo({todo,deleteTodo}) {
 
   const [color,setColor]=useState('none')
 
@@ -40,7 +40,9 @@ function clicked()
             />
           </svg>
         </button>
-        <button>
+        <button onClick={()=>{
+          deleteTodo(todo)
+        }}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6 text-red-500"

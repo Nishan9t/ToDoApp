@@ -1,7 +1,7 @@
 import React from "react";
 import Todo from "./Todo";
 
-export default function ToDoList({ todos }) {
+export default function ToDoList({ todos ,deleteTodo}) {
 
  
   
@@ -12,7 +12,7 @@ export default function ToDoList({ todos }) {
       
       
       {todos.map((todo) => {
-        return <Todo todo={todo} />;
+        return <Todo todo={todo}  deleteTodo={deleteTodo}/>;
       })}
     </div>
   );
